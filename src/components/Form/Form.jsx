@@ -1,11 +1,13 @@
-import { useEffect } from "react";
-import { useRef } from "react";
-import { useState } from "react";
+// import { useEffect } from "react";
+// import { useRef } from "react";
+// import { useState } from "react";
 
-const Form = () => {
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+import { useRef } from "react";
+
+const Form = ({ handelSubmit, children }) => {
+  //   const [name, setName] = useState(null);
+  //   const [email, setEmail] = useState(null);
+  //   const [password, setPassword] = useState(null);
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -22,21 +24,30 @@ const Form = () => {
   //     const password = e.target.value;
   //     setPassword(password);
   //   };
-  useEffect(() => {
-    passwordRef.current.focus();
-  }, []);
 
-  const handelSubmit = (e) => {
+  const handelLocalSubmit = (e) => {
     e.preventDefault();
-    console.log(nameRef.current.value);
-    console.log(emailRef.current.value);
-    console.log(passwordRef.current.value);
+    const data = {
+      //   name: e.target.name.value,
+      //   email: e.target.email.value,
+      //   password: e.target.password.value,
+
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+    handelSubmit(data);
+    // console.log(nameRef.current.value);
+    // console.log(emailRef.current.value);
+    // console.log(passwordRef.current.value);
+
     // console.log(name, email, password);
   };
   return (
     <div className="border-2 rounded border-green-300 w-fit">
-      <form onSubmit={handelSubmit}>
-        <input ref={nameRef} type="text" name="name" placeholder="name" />
+      {children}
+      <form onSubmit={handelLocalSubmit}>
+        <input type="text" name="name" ref={nameRef} placeholder="name" />
         <br></br>
         <input
           //   onChange={handleEmail}
