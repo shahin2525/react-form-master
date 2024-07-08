@@ -2,13 +2,14 @@
 // import { useRef } from "react";
 // import { useState } from "react";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const Form = ({ handelSubmit, children }) => {
-  //   const [name, setName] = useState(null);
+  const [name, setName] = useState(null);
   //   const [email, setEmail] = useState(null);
   //   const [password, setPassword] = useState(null);
-  const nameRef = useRef(null);
+  // const nameRef = useRef(null);
+  console.log(name);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -32,7 +33,8 @@ const Form = ({ handelSubmit, children }) => {
       //   email: e.target.email.value,
       //   password: e.target.password.value,
 
-      name: nameRef.current.value,
+      // name: nameRef.current.value,
+      name: name,
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
@@ -47,15 +49,15 @@ const Form = ({ handelSubmit, children }) => {
     <div className="border-2 rounded border-green-300 w-fit">
       {children}
       <form onSubmit={handelLocalSubmit}>
-        <input type="text" name="name" ref={nameRef} placeholder="name" />
-        <br></br>
         <input
-          //   onChange={handleEmail}
-          ref={emailRef}
-          type="email"
-          name="email"
-          placeholder="email"
+          type="text"
+          name="name"
+          onChange={(e) => setName(e.target.value)}
+          // ref={nameRef}
+          placeholder="name"
         />
+        <br></br>
+        <input ref={emailRef} type="email" name="email" placeholder="email" />
         <br></br>
         <input
           ref={passwordRef}
