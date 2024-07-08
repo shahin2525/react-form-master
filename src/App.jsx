@@ -1,24 +1,17 @@
+import { createContext } from "react";
 import "./App.css";
-import Form from "./components/Form/Form";
+
+import GrandPa from "./components/GrandPa/GrandPa";
+import { useState } from "react";
+export const MoneyContext = createContext(10);
 
 function App() {
-  const handleSignUpSubmit = (data) => {
-    console.log("even data", data);
-  };
-  const handleProfileSubmit = (data) => {
-    console.log("even data", data);
-  };
+  const [money, setMoney] = useState(1000);
   return (
     <>
-      <h1>react vite</h1>
-      <Form handelSubmit={handleSignUpSubmit}>
-        <h1>Sign up</h1>
-        <p>please sign up right now</p>
-      </Form>
-      <Form handelSubmit={handleProfileSubmit}>
-        <h1>Update profile</h1>
-        <p>Always update your profile</p>
-      </Form>
+      <MoneyContext.Provider value={{ money, setMoney }}>
+        <GrandPa></GrandPa>
+      </MoneyContext.Provider>
     </>
   );
 }
